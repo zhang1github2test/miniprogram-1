@@ -1,0 +1,20 @@
+<view class="container">
+  <button bindtap="chooseImage">选择图片</button>
+  <image src="{{imageSrc}}" wx:if="{{imageSrc}}" mode="aspectFit" class="image" 
+      bindtap="previewImage"
+  />
+
+  <view class="text-area">
+    <text>识别的文字:</text>
+    <textarea maxlength="-1" 	auto-height="true" value="{{recognizedText}}" placeholder="确认背诵内容"></textarea>
+  </view>
+
+  <button bindtap="startRecitation" wx:if="{{recognizedText}}">开始背诵</button>
+  <view wx:if="{{recitationInProgress}}">
+    <button bindtap="stopRecitation">停止录音</button>
+  </view>
+
+  <view wx:if="{{feedbackText}}">
+    <text>{{feedbackText}}</text>
+  </view>
+</view>

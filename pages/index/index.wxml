@@ -9,11 +9,16 @@
     <textarea maxlength="-1" 	auto-height="true" value="{{recognizedText}}" placeholder="确认背诵内容"></textarea>
   </view>
 
-  <button bindtap="startRecitation" wx:if="{{recognizedText}}">开始背诵</button>
+  <button bindtap="startRecord" wx:if="{{recognizedText}}">开始录音</button>
   <view wx:if="{{recitationInProgress}}">
-    <button bindtap="stopRecitation">停止录音</button>
+    <button bindtap="stopRecord">结束录音</button>
   </view>
-
+  <view wx:if="{{audioSrc}}">
+  <audio id="audio" src="{{audioSrc}}" controls></audio>
+</view>
+  <view wx:if="{{successFileName}}">
+    <button bindtap="stopRecord">检测背诵</button>
+  </view>
   <view wx:if="{{feedbackText}}">
     <text>{{feedbackText}}</text>
   </view>

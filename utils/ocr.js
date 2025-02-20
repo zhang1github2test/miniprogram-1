@@ -1,5 +1,4 @@
 // utils/ocr.js
-const appId = '你的百度APP_ID';
 const app = getApp()
 const apiKey = 'KJiWvDqnLAVuQsm3MniM3xwy';
 const secretKey = 'NXqO4sbsV7VUmTwqhhCAhFF4pjlluJx6';

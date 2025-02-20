@@ -1,3 +1,10 @@
+<!-- index.wxml -->
+<view>
+  <button bindtap="requestStreamData">发送大模型调用</button>
+</view>
+<view>
+  <rich-text nodes="{{markdownText}}"></rich-text>
+</view>
 <view class="container">
   <button bindtap="chooseImage">选择图片</button>
   <image src="{{imageSrc}}" wx:if="{{imageSrc}}" mode="aspectFit" class="image" 
@@ -6,7 +13,12 @@
 
   <view class="text-area">
     <text>识别的文字:</text>
-    <textarea maxlength="-1" 	auto-height="true" value="{{recognizedText}}" placeholder="确认背诵内容"></textarea>
+    <textarea 
+    maxlength="-1" 	
+    auto-height="true" 
+    value="{{recognizedText}}" 
+    bindinput="onInputChange"
+    placeholder="确认背诵内容"></textarea>
   </view>
 
   <button bindtap="startRecord" wx:if="{{recognizedText}}">开始录音</button>
@@ -17,8 +29,13 @@
   <audio id="audio" src="{{audioSrc}}" controls></audio>
 </view>
   <view wx:if="{{successFileName}}">
-    <button bindtap="stopRecord">检测背诵</button>
+    <button bindtap="createTask">开始识别</button>
   </view>
+<view class="container">
+  <text>语音识别结果:</text>
+  <text>{{ result }}</text>
+</view>
+
   <view wx:if="{{feedbackText}}">
     <text>{{feedbackText}}</text>
   </view>

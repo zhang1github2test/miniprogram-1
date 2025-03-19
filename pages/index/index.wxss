@@ -1,17 +1,73 @@
-.container {
-  padding: 20px;
+/* index.wxss */
+.page-container {
+  padding: 20rpx;
+  background-color: #fff5e1; /* 轻柔的黄色背景，给人温馨感 */
 }
 
-.image {
+.button-container,
+.image-picker,
+.text-area-container,
+.record-button-container,
+.task-button-container,
+.result-container,
+.feedback-container {
+  margin-bottom: 25rpx; /* 增加间距，避免界面过于拥挤 */
+}
+
+.action-button {
+  border-radius: 10rpx;
+  font-size: 30rpx;
+  color: white;
   width: 100%;
-  height: 300px;
-  margin-bottom: 20px;
+  padding: 15rpx;
+  margin-top: 10rpx;
+}
+
+.large {
+  background-color: #4CAF50; /* 温和的绿色 */
+}
+
+.medium {
+  background-color: #FF9800; /* 温暖的橙色 */
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 15rpx;
 }
 
 .text-area {
-  margin-bottom: 20px;
+  width: 100%;
+  height: 120rpx;
+  padding: 15rpx;
+  font-size: 28rpx;
+  border-radius: 10rpx;
+  border: 1px solid #ddd;
+  background-color: #ffffff;
 }
 
-button {
-  margin-top: 20px;
+.image-preview {
+  margin-top: 20rpx;
+  width: 100%;
+  height: 200rpx;
+  object-fit: cover;
+  border-radius: 8rpx;
+}
+
+.audio-container audio {
+  width: 100%;
+  margin-top: 20rpx;
+}
+
+.feedback-container {
+  background-color: #FFEBEE; /* 轻柔的红色背景 */
+  padding: 15rpx;
+  border-radius: 8rpx;
+}
+
+.feedback-text {
+  font-size: 30rpx;
+  color: #F44336; /* 强烈的红色反馈提示 */
 }

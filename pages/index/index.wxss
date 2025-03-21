@@ -1,73 +1,177 @@
-/* index.wxss */
-.page-container {
+/* =====================================================
+  全局容器样式
+===================================================== */
+.container {
   padding: 20rpx;
-  background-color: #fff5e1; /* 轻柔的黄色背景，给人温馨感 */
+  background: #f0f8ff; /* 浅蓝色主背景 */
 }
 
-.button-container,
-.image-picker,
-.text-area-container,
-.record-button-container,
-.task-button-container,
-.result-container,
-.feedback-container {
-  margin-bottom: 25rpx; /* 增加间距，避免界面过于拥挤 */
+/* =====================================================
+  快捷入口区块样式
+===================================================== */
+.quick-access {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 两列布局 */
+  gap: 20rpx; /* 按钮间距 */
+  padding: 30rpx;
+  margin-bottom: 40rpx;
 }
 
-.action-button {
-  border-radius: 10rpx;
-  font-size: 30rpx;
-  color: white;
-  width: 100%;
-  padding: 15rpx;
-  margin-top: 10rpx;
+/* 按钮基础样式 */
+.task-btn {
+  width: 90%;
+  height: 180rpx;
+  border-radius: 30rpx; /* 圆润边角 */
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  position: relative;
 }
 
-.large {
-  background-color: #4CAF50; /* 温和的绿色 */
+/* 按钮内容容器 */
+.task-btn-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
 }
 
-.medium {
-  background-color: #FF9800; /* 温暖的橙色 */
+/* 按钮渐变背景（根据类型动态绑定） */
+.task-btn-blue {
+  background: linear-gradient(135deg, #a1c4fd, #c58bf2); /* 蓝色 */
 }
 
-.section-title {
-  font-size: 32rpx;
+.task-btn-orange {
+  background: linear-gradient(135deg, #ffdfba, #ffb380); /* 橙色 */
+}
+
+.task-btn-green {
+  background: linear-gradient(135deg, #a2d9c2, #76d7c4); /* 绿色 */
+}
+
+.task-btn-purple {
+  background: linear-gradient(135deg, #d9a5ff, #c484f3); /* 紫色 */
+}
+
+.task-btn-red {
+  background: linear-gradient(135deg, #ffafbd, #ff7a91); /* 红色 */
+}
+
+/* 按钮悬停效果 */
+.task-btn:active {
+  transform: translateY(-4rpx); /* 点击下沉 */
+  box-shadow: 0 12rpx 24rpx rgba(0, 0, 0, 0.2);
+}
+
+/* 图标与文字样式 */
+.task-icon {
+  width: 80rpx;
+  height: 80rpx;
+  margin-bottom: 10rpx;
+}
+
+.task-text {
+  font-size: 35rpx;
   font-weight: bold;
   color: #333;
-  margin-bottom: 15rpx;
+  text-shadow: 0 1rpx 2rpx rgba(0, 0, 0, 0.2);
 }
 
-.text-area {
+
+
+
+/* =====================================================
+  已完成任务列表样式
+===================================================== */
+.completed-tasks {
+  background: linear-gradient(135deg, #f0f8ff, #e6f7ff); /* 轻柔渐变背景 */
+  border-radius: 30rpx;
+  padding: 30rpx;
+  margin-top: 40rpx;
   width: 100%;
-  height: 120rpx;
-  padding: 15rpx;
-  font-size: 28rpx;
-  border-radius: 10rpx;
-  border: 1px solid #ddd;
-  background-color: #ffffff;
+}
+/* 标题样式 */
+.task-list-title {
+  width: 100%; /* 占满父容器宽度 */
+  font-size: 40rpx; /* 字体大小 */
+  text-align: left; /* 居中对齐（可选） */
+  padding: 20rpx 0; /* 上下间距，可调整 */
+  background: linear-gradient(135deg, #f0f8ff, #e6f7ff); /* 与任务列表背景一致 */
+  border-radius: 30rpx 30rpx 0 0; /* 顶部圆角 */
 }
 
-.image-preview {
-  margin-top: 20rpx;
-  width: 100%;
-  height: 200rpx;
-  object-fit: cover;
-  border-radius: 8rpx;
+.task-list {
+  height: 100%;
+  border-radius: 30rpx;
+  padding: 20rpx;
 }
 
-.audio-container audio {
-  width: 100%;
-  margin-top: 20rpx;
+/* 任务卡片样式（增加宽度并优化布局） */
+.task-card {
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+  width: 90%; /* 卡片宽度占父容器的90% */
+  max-width: 600rpx; /* 最大宽度限制（适配大屏幕） */
 }
 
-.feedback-container {
-  background-color: #FFEBEE; /* 轻柔的红色背景 */
-  padding: 15rpx;
-  border-radius: 8rpx;
+.task-card:hover {
+  transform: translateY(-4rpx);
+  box-shadow: 0 6rpx 16rpx rgba(0, 0, 0, 0.15);
 }
 
-.feedback-text {
+/* 任务卡片内容布局优化 */
+.task-info {
+  display: flex;
+  align-items: center;
+  width: 100%; /* 内容占满卡片宽度 */
+  gap: 15rpx;
+}
+
+.task-type-icon {
+  width: 35rpx;
+  height: 35rpx;
+  margin-right: 15rpx;
+}
+
+.task-name {
   font-size: 30rpx;
-  color: #F44336; /* 强烈的红色反馈提示 */
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5rpx;
+  width: 100%; /* 任务名称占满宽度 */
+}
+
+.task-time {
+  font-size: 24rpx;
+  color: #666;
+  margin-left: 10rpx;
+  width: 100%; /* 时间占满宽度 */
+}
+
+/* 积分奖励布局 */
+.reward {
+  display: flex;
+  align-items: center;
+  margin-top: 10rpx; /* 奖励与任务信息间隔 */
+  width: 90%;
+}
+
+.reward-text {
+  font-size: 28rpx;
+  color: #ff6600;
+  margin-right: 10rpx;
+  width: 50%;
+}
+
+.badge {
+  width: 100%;
+  height: 50rpx;
+  border-radius: 50%;
 }

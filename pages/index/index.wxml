@@ -1,57 +1,51 @@
-<!-- index.wxml -->
-<view class="page-container">
-  <!-- 图片选择区域 -->
-  <view class="image-picker">
-    <button class="action-button medium" bindtap="chooseImage">选择图片</button>
-    <image src="{{imageSrc}}" wx:if="{{imageSrc}}" mode="aspectFit" class="image-preview"
-      bindtap="previewImage" />
+<!-- 首页容器 -->
+<view class="container">
+  <!-- 快捷入口区块 -->
+  <view class="quick-access">
+    <!-- 循环渲染五个功能按钮 -->
+    <block wx:for="{{taskButtons}}" wx:key="id">
+      <button 
+        class="task-btn-{{item.color}} task-btn" 
+        bindtap="navigateToTask" 
+        data-type="{{item.type}}"
+      >
+        <image class="task-icon" src="{{item.icon}}" mode="aspectFit" />
+        <text class="task-text">{{item.text}}</text>
+      </button>
+    </block>
   </view>
 
-  <!-- 识别文字输入区域 -->
-  <view class="text-area-container">
-    <text class="section-title">背诵原文:</text>
-    <textarea class="text-area"
-      maxlength="-1" 
-      auto-height="true" 
-      value="{{recognizedText}}" 
-      bindinput="onInputChange"
-      placeholder="输入要背诵的文字或者上传图片进行识别"></textarea>
-  </view>
-
-  <!-- 录音按钮 -->
-  <view class="record-button-container">
-    <button class="action-button large" bindtap="startRecord" wx:if="{{recognizedText}}">开始录音</button>
-  </view>
-
-  <!-- 录音结束按钮 -->
-  <view wx:if="{{recitationInProgress}}" class="stop-record-container">
-    <button class="action-button large" bindtap="stopRecord">结束录音</button>
-  </view>
-
-  <!-- 播放语音 -->
-  <view wx:if="{{audioSrc}}" class="audio-container">
-    <audio id="audio" src="{{audioSrc}}" controls></audio>
-  </view>
-
-  <!-- 创建任务按钮 -->
-  <view wx:if="{{successFileName}}" class="task-button-container">
-    <button class="action-button large" bindtap="createTask">开始识别</button>
-  </view>
-
-  <!-- 语音识别结果 -->
-  <view class="result-container">
-    <text class="section-title">背诵的结果:</text>
-    <text>{{ result }}</text>
-  </view>
- 
-   <!-- 开始检测背诵请求按钮 -->
-   <view class="record-button-container" wx:if="{{result}}">
-    <button class="action-button large" bindtap="checkReciteByLLM" wx:if="{{recognizedText}}">分析背诵</button>
-  </view>
-
-  <!-- 反馈文本区域 -->
-  <view wx:if="{{llmRespText}}" class="feedback-container">
-    <text>背诵结果反馈:</text>
-    <text class="feedback-text">{{llmRespText}}</text>
+  <!-- 已完成任务列表 -->
+  <view class="completed-tasks">
+    <scroll-view 
+      class="task-list" 
+      scroll-y 
+      enable-back-to-top
+    >
+      <!-- 循环渲染任务卡片 -->
+      <view class="task-list-title">已完成任务列表</view>
+      <view>已完成任务列表</view>
+      <block wx:for="{{completedTasks}}" wx:key="id">
+        <view 
+          class="task-card {{taskCardStyle(item.type)}}" 
+          bindtap="showTaskDetail"
+          data-task-id="{{item.id}}"
+        >
+          <view class="task-info">
+            <image class="task-type-icon" src="{{item.typeIcon}}" mode="aspectFit" />
+            <text class="task-name">{{item.title}}</text>
+            <text class="task-time">{{item.time}}</text>
+          </view>
+          <view class="reward">
+            <text class="reward-text">+{{item.points}}积分</text>
+            <image class="badge" src="{{item.badge}}" mode="aspectFit" />
+          </view>
+        </view>
+      </block>
+    </scroll-view>
   </view>
 </view>
+
+<!-- 底部 TabBar
+<import src="../../components/tabbar/index.wxml" />
+<template is="tabbar" data="{{tabbar: tabbarData}}" /> -->

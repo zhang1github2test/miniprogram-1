@@ -1,0 +1,121 @@
+<!-- index.wxml -->
+<view class="page-container">
+  <!-- 模式切换栏 -->
+  <view class="mode-switch">
+    <view 
+      class="mode-item {{currentMode === 'photo' ? 'active' : ''}}" 
+      data-mode="photo" 
+      bindtap="switchMode">
+      拍照识别
+      </view>
+    <view 
+      class="mode-item {{currentMode === 'query' ? 'active' : ''}}" 
+      data-mode="query" 
+      bindtap="switchMode"
+    >
+      查询获取
+    </view>
+  </view>
+  <!-- 图片选择区域 -->
+  <view class="image-picker" wx:if="{{currentMode === 'photo'}}">
+    <button class="action-button medium" bindtap="chooseImage">选择图片</button>
+    <image src="{{imageSrc}}" wx:if="{{imageSrc}}" mode="aspectFit" class="image-preview"
+      bindtap="previewImage" />
+  </view>
+  <view wx:if="{{currentMode === 'query'}}">
+    <view class="filter-container">
+    <view class="picker-row">
+      <picker mode="selector" range="{{units}}" bindchange="selectUnit">
+        <view class="picker-item">单元：{{selectedUnit || '请选择'}}</view>
+      </picker>
+      <picker mode="selector" range="{{types}}" bindchange="selectType">
+        <view class="picker-item">类型：{{selectType || '请选择'}}</view>
+      </picker>
+      </view>
+        <!-- 新增输入框 -->
+  <view class="input-item">
+    <text>备注：</text>
+    <input 
+      class="input-box" 
+      placeholder="请输入备注" 
+      bindinput="handleNoteInput"
+      value="{{note}}"
+    />
+  </view>
+
+  <view class="input-item">
+    <text>年级：</text>
+    <input 
+      class="input-box" 
+      placeholder="请输入年级" 
+      type="string" 
+      bindinput="handleGradeInput"
+      value="{{grade}}"
+    />
+  </view>
+        <!-- 新增的页码输入框 -->
+      <view class="input-item">
+      <text>页码：</text>
+      <input 
+        class="input-box" 
+        placeholder="请输入页码" 
+        type="number" 
+        bindinput="handlePageInput"
+        value="{{page}}"
+      />
+    </view>
+    
+      <button class="btn-search" bindtap="queryContent">查询</button>
+    </view>
+  </view>
+
+
+  <!-- 识别文字输入区域 -->
+  <view class="text-area-container">
+    <text class="section-title">待背诵内容:</text>
+    <rich-text class="text-area" wx:if="{{!recitationInProgress && currentMode === 'query'}}" nodes="{{formattedText}}"></rich-text>
+    <!-- <textarea class="text-area" wx:if="{{!recitationInProgress &&  currentMode === 'photo'}}"
+      maxlength="-1" 
+      auto-height="true" 
+      value="{{recognizedText}}" 
+      bindinput="onInputChange"
+      placeholder="输入要背诵的文字或者上传图片进行识别"></textarea> -->
+  </view>
+
+  <!-- 录音按钮 -->
+  <view class="record-button-container">
+    <button class="action-button large" bindtap="startRecord" wx:if="{{recognizedText || formattedText}}">开始背诵</button>
+  </view>
+
+  <!-- 录音结束按钮 -->
+  <view wx:if="{{recitationInProgress}}" class="stop-record-container">
+    <button class="action-button large" bindtap="stopRecord">结束背诵</button>
+  </view>
+
+  <!-- 播放语音 -->
+  <view wx:if="{{audioSrc}}" class="audio-container">
+    <audio id="audio" src="{{audioSrc}}" controls></audio>
+  </view>
+
+  <!-- 创建任务按钮 -->
+  <view wx:if="{{successFileName}}" class="task-button-container">
+    <button class="action-button large" bindtap="createTask">识别背诵内容</button>
+  </view>
+
+  <!-- 语音识别结果 -->
+  <view class="result-container" wx:if="{{result}}">
+    <text class="section-title">背诵的结果:</text>
+    <text>{{ result }}</text>
+  </view>
+ 
+   <!-- 开始检测背诵请求按钮 -->
+   <view class="record-button-container" wx:if="{{result}}">
+    <button class="action-button large" bindtap="checkReciteByLLM" wx:if="{{result  && recognizedText}}">分析背诵</button>
+  </view>
+
+  <!-- 反馈文本区域 -->
+  <view wx:if="{{llmRespText}}" class="feedback-container">
+    <text>背诵结果反馈:</text>
+    <text class="feedback-text">{{llmRespText}}</text>
+  </view>
+</view>

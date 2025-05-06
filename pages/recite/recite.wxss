@@ -1,0 +1,164 @@
+/* index.wxss */
+.page-container {
+  padding: 20rpx;
+  background-color: #fff5e1; /* 轻柔的黄色背景，给人温馨感 */
+}
+
+.button-container,
+.image-picker,
+.text-area-container,
+.record-button-container,
+.task-button-container,
+.result-container,
+.feedback-container {
+  margin-bottom: 25rpx; /* 增加间距，避免界面过于拥挤 */
+}
+
+.action-button {
+  border-radius: 10rpx;
+  font-size: 30rpx;
+  color: white;
+  width: 100%;
+  padding: 15rpx;
+  margin-top: 10rpx;
+}
+
+.large {
+  background-color: #4CAF50; /* 温和的绿色 */
+}
+
+.medium {
+  background-color: #FF9800; /* 温暖的橙色 */
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 15rpx;
+}
+
+.text-area {
+  width: 100%;
+  height: 120rpx;
+  font-size: 28rpx;
+  border-radius: 10rpx;
+  background-color: #fff5e1;
+}
+
+.image-preview {
+  margin-top: 20rpx;
+  width: 100%;
+  height: 200rpx;
+  object-fit: cover;
+  border-radius: 8rpx;
+}
+
+.audio-container audio {
+  width: 100%;
+  margin-top: 20rpx;
+}
+
+.feedback-container {
+  background-color: #FFEBEE; /* 轻柔的红色背景 */
+  padding: 15rpx;
+  border-radius: 8rpx;
+}
+
+.feedback-text {
+  font-size: 30rpx;
+  color: #F44336; /* 强烈的红色反馈提示 */
+}
+
+.mode-switch {
+  display: flex;
+  justify-content: center;
+  margin: 20rpx;
+  background: white;
+  border-radius: 20rpx;
+  padding: 15rpx;
+}
+
+.mode-item {
+  flex: 1;
+  text-align: center;
+  padding: 15rpx;
+  color: #666;
+}
+
+.mode-item.active {
+  color: #333;
+  border-bottom: 4rpx solid #a1c4fd;
+}
+
+/* 查询模式样式 */
+.filter-container {
+  padding: 20rpx;
+  background: white;
+  border-radius: 20rpx;
+  margin: 20rpx;
+}
+
+.picker-item {
+  padding: 20rpx;
+  border-bottom: 1rpx solid #eee;
+}
+
+.btn-search {
+  width: 200rpx;
+  height: 60rpx;
+  background: linear-gradient(135deg, #a1c4fd, #c58bf2);
+  border-radius: 30rpx;
+  color: white;
+  margin-top: 20rpx;
+}
+
+
+
+
+.filter-container {
+  padding: 20rpx;
+  background: white;
+  border-radius: 20rpx;
+  margin-bottom: 30rpx;
+}
+
+.picker-item,
+.input-item {
+  padding: 20rpx;
+  border-bottom: 1rpx solid #eee;
+}
+
+.input-item {
+  display: flex;
+  align-items: center;
+}
+
+.input-box {
+  flex: 1;
+  height: 60rpx;
+  margin-left: 20rpx;
+  padding: 10rpx;
+  border: 1rpx solid #ccc;
+  border-radius: 8rpx;
+}
+
+.input-item:last-child {
+  border-bottom: none;
+}
+
+.btn-search {
+  width: 200rpx;
+  height: 60rpx;
+  background: linear-gradient(135deg, #a1c4fd, #c58bf2);
+  border-radius: 30rpx;
+  color: white;
+  margin: 20rpx auto;
+}
+/* 让两个 picker 组件排在同一行 */
+.picker-row {
+  display: flex;
+  justify-content: space-between; /* 两个选择框左右排列 */
+  gap: 10px; /* 间距 */
+  margin-bottom: 10px;
+}

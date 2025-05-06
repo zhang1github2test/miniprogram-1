@@ -2,7 +2,7 @@
   "pages": [
     "pages/index/index",
     "pages/logs/logs",
-    "pages/task/recite/recite"
+    "pages/recite/recite"
   ],
 
   "window": {

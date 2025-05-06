@@ -1,5 +1,6 @@
 // pages/common/request.js
-const BASE_URL = 'http://localhost:8080'; // 替换为你的后端地址
+// const BASE_URL = 'http://localhost:8080'; // 替换为你的后端地址
+const BASE_URL = 'https://hdsw.top:8443/syx-service'
 let isRefreshing = false; // 标记是否正在刷新Token
 let retryQueue = []; // 用于存储需要重试的请求
 

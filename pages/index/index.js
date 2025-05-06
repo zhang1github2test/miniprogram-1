@@ -81,7 +81,7 @@ Page({
     const type = e.currentTarget.dataset.type;
     console.log(type)
     wx.navigateTo({
-      url: `/pages/task/${type}/${type}`
+      url: `/pages/${type}/${type}`
     });
   },
 

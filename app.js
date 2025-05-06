@@ -1,4 +1,6 @@
 // app.js
+
+const BASE_URL = 'https://hdsw.top:8443/syx-service'
 App({
   onLaunch() {
     // 展示本地存储能力
@@ -12,7 +14,7 @@ App({
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         if (res.code) {
           wx.request({
-              url: 'http://localhost:8080/api/login',
+              url: `${BASE_URL}/api/login`,
               method: 'POST',
               data: {
                   code: res.code

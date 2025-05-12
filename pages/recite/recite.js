@@ -9,7 +9,7 @@ Page({
     // 识别到的文字
     recognizedText: '',
     recitationInProgress: false,
-    formattedText: '',
+    formattedText: '邯郸学步',
     audioSrc:'',
     successFileName: '',
     parentPath: '',
@@ -18,12 +18,15 @@ Page({
     // 大模型识别到背诵情况分析
     llmRespText:'',
     currentMode:'query',
-    units: ['第一单元', '第二单元'],
+    units: ['第一单元', '第二单元','第三单元','第四单元','第五单元'],
     selectedUnit: '',
     types: ['好词','课文'],
     selectType: '',
-    notes:'',
-    grade:'',
+    grades: ['1','2','3','4','5','6'],
+    selectedGrade: '',
+    semesters: ['上学期','下学期'],
+    selectedSemester: '',
+    note:'',
     page: 1
   },
   selectUnit(e) {
@@ -31,6 +34,12 @@ Page({
   },
   selectType(e) {
     this.setData({ selectType: this.data.types[e.detail.value] });
+  },
+  selectGrade(e) {
+    this.setData({ selectedGrade: this.data.grades[e.detail.value] });
+  },
+  selectSemester(e) {
+    this.setData({ selectedSemester: this.data.semesters[e.detail.value] });
   },
     // 切换模式
   switchMode(e) {
@@ -47,8 +56,9 @@ Page({
         request("/v1/recite-content/query",{
           "method":"POST",
           "data":{
-            "grade":this.data.grade,
-            "notes":this.data.notes,
+            "grade":this.data.selectedGrade,
+            "semester":this.data.selectedSemester,
+            "notes":this.data.note,
             "unitName": this.data.selectedUnit,
             "type":this.data.selectType,
             "page":this.data.page,
@@ -98,7 +108,7 @@ Page({
   onInputChange: function (event) {
     // 获取输入框中的内容
     const inputValue = event.detail.value;
-    
+
     // 更新 recognizedText 数据
     this.setData({
       recognizedText: inputValue
@@ -207,13 +217,13 @@ Page({
       //             console.error("Invalid JSON string:", error);
       //             return null;
       //         }
-         
-   
+
+
       //     this.setData({
       //       successFileName: data2.fileName,
       //       parentPath: data2.parentPath,
       //     })
-     
+
       //     // 根据需要处理服务器返回的结果
       //   },
       //   fail:(err)=> {
@@ -329,7 +339,16 @@ Page({
     }
     return str;
 },
-
+submitRecitRecord(){
+  request('/v1/recite-content/record', {
+    method: 'POST',
+    "data":{
+      "original_content": this.data.formattedText,
+      "file_date": this.data.parentPath,
+      "audio_file_name": this.data.successFileName
+    }
+  }).then((response) => console.info(response)).catch((err)=>console.error(err));
+},
 
 // 将背诵的原文和 语音识别到文字进行结果校验
 checkReciteByLLM(){
@@ -383,7 +402,7 @@ checkReciteByLLM(){
   //       },
   //   enableChunked: true, // 启用流式数据输出
   //   success:(res) => {
-    
+
   //   },
   //   fail:(err) => {
   //     console.error('请求失败:', err);

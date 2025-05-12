@@ -32,28 +32,27 @@
         <view class="picker-item">类型：{{selectType || '请选择'}}</view>
       </picker>
       </view>
+      <view class="picker-row">
+      <picker mode="selector" range="{{grades}}" bindchange="selectGrade">
+        <view class="picker-item">年级：{{selectedGrade || '请选择'}}</view>
+      </picker>
+      <picker mode="selector" range="{{semesters}}" bindchange="selectSemester">
+        <view class="picker-item">学期：{{selectedSemester || '请选择'}}</view>
+      </picker>
+      </view>
         <!-- 新增输入框 -->
   <view class="input-item">
-    <text>备注：</text>
+    <text>内容：</text>
     <input 
       class="input-box" 
-      placeholder="请输入备注" 
+      placeholder="请输入内容或者词语" 
       bindinput="handleNoteInput"
       value="{{note}}"
     />
   </view>
 
-  <view class="input-item">
-    <text>年级：</text>
-    <input 
-      class="input-box" 
-      placeholder="请输入年级" 
-      type="string" 
-      bindinput="handleGradeInput"
-      value="{{grade}}"
-    />
-  </view>
-        <!-- 新增的页码输入框 -->
+
+    <!-- 新增的页码输入框 -->
       <view class="input-item">
       <text>页码：</text>
       <input 
@@ -98,24 +97,29 @@
   </view>
 
   <!-- 创建任务按钮 -->
-  <view wx:if="{{successFileName}}" class="task-button-container">
+  <!-- <view wx:if="{{successFileName}}" class="task-button-container">
     <button class="action-button large" bindtap="createTask">识别背诵内容</button>
-  </view>
+  </view> -->
 
   <!-- 语音识别结果 -->
-  <view class="result-container" wx:if="{{result}}">
+  <!-- <view class="result-container" wx:if="{{result}}">
     <text class="section-title">背诵的结果:</text>
     <text>{{ result }}</text>
-  </view>
+  </view> -->
  
-   <!-- 开始检测背诵请求按钮 -->
-   <view class="record-button-container" wx:if="{{result}}">
-    <button class="action-button large" bindtap="checkReciteByLLM" wx:if="{{result  && recognizedText}}">分析背诵</button>
+ <!-- 提交背诵记录-->
+  <view class="record-button-container" wx:if="{{successFileName}}">
+    <button class="action-button large" bindtap="submitRecitRecord">提交</button>
   </view>
 
+   <!-- 开始检测背诵请求按钮 -->
+   <!-- <view class="record-button-container" wx:if="{{result}}">
+    <button class="action-button large" bindtap="checkReciteByLLM" wx:if="{{result  || recognizedText}}">分析背诵</button>
+  </view> -->
+
   <!-- 反馈文本区域 -->
-  <view wx:if="{{llmRespText}}" class="feedback-container">
+  <!-- <view wx:if="{{llmRespText}}" class="feedback-container">
     <text>背诵结果反馈:</text>
     <text class="feedback-text">{{llmRespText}}</text>
-  </view>
+  </view> -->
 </view>
